@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RawRabbit.Configuration.Exchange;
 using RawRabbit.Configuration.Queue;
 
@@ -11,6 +12,7 @@ namespace RawRabbit.Configuration.Subscribe
 			Queue = _queueBuilder.Configuration,
 			Exchange = _exchangeBuilder.Configuration,
 			RoutingKey = _routingKey ?? _queueBuilder.Configuration.QueueName,
+			Arguments = _arguments,
 			NoAck = _noAck,
 			PrefetchCount = _prefetchCount == 0 ? (ushort)50 : _prefetchCount
 		};
@@ -18,6 +20,7 @@ namespace RawRabbit.Configuration.Subscribe
 		private readonly ExchangeConfigurationBuilder _exchangeBuilder;
 		private readonly QueueConfigurationBuilder _queueBuilder;
 		private string _routingKey;
+		private IDictionary<string, object> _arguments;
 		private ushort _prefetchCount;
 		private bool _noAck;
 
@@ -34,6 +37,12 @@ namespace RawRabbit.Configuration.Subscribe
 		public ISubscriptionConfigurationBuilder WithRoutingKey(string routingKey)
 		{
 			_routingKey = routingKey;
+			return this;
+		}
+
+		public ISubscriptionConfigurationBuilder WithArguments(IDictionary<string, object> arguments)
+		{
+			_arguments = arguments;
 			return this;
 		}
 

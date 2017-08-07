@@ -8,6 +8,7 @@ namespace RawRabbit.Attributes
 		internal bool? NullableNoAck;
 
 		public string RoutingKey { get; set; }
+		public IDictionary<string, object> Arguments { get; set; }
 		public ushort PrefetchCount { get; set; }
 		public bool NoAck { get { return NullableNoAck.GetValueOrDefault(); } set { NullableNoAck = value; } }
 	}

@@ -53,7 +53,8 @@ namespace RawRabbit.Extensions.MessageSequence.Core
 			return _topologyProvider.BindQueueAsync(
 				_queueConfig,
 				chainConfig.Exchange,
-				$"{chainConfig.RoutingKey}.{globalMessaegId}"
+				$"{chainConfig.RoutingKey}.{globalMessaegId}",
+				chainConfig.Arguments
 			);
 		}
 

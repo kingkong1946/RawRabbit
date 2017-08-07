@@ -10,6 +10,7 @@ namespace RawRabbit.Configuration.Respond
 		IResponderConfigurationBuilder WithExchange(Action<IExchangeConfigurationBuilder> exchange);
 		IResponderConfigurationBuilder WithQueue(Action<IQueueConfigurationBuilder> queue);
 		IResponderConfigurationBuilder WithRoutingKey(string routingKey);
+		IResponderConfigurationBuilder WithArguments(IDictionary<string, object> arguments);
 		IResponderConfigurationBuilder WithNoAck(bool noAck);
 	}
 }

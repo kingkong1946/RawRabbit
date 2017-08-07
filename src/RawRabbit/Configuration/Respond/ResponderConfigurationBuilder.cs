@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RawRabbit.Configuration.Exchange;
 using RawRabbit.Configuration.Queue;
 
@@ -50,6 +51,12 @@ namespace RawRabbit.Configuration.Respond
 		public IResponderConfigurationBuilder WithRoutingKey(string routingKey)
 		{
 			Configuration.RoutingKey = routingKey;
+			return this;
+		}
+
+		public IResponderConfigurationBuilder WithArguments(IDictionary<string, object> arguments)
+		{
+			Configuration.Arguments = arguments;
 			return this;
 		}
 

@@ -16,7 +16,7 @@ namespace RawRabbit.Common
 	{
 		Task DeclareExchangeAsync(ExchangeConfiguration exchange);
 		Task DeclareQueueAsync(QueueConfiguration queue);
-		Task BindQueueAsync(QueueConfiguration queue, ExchangeConfiguration exchange, string routingKey);
+		Task BindQueueAsync(QueueConfiguration queue, ExchangeConfiguration exchange, string routingKey, IDictionary<string, object> arguments);
 		Task UnbindQueueAsync(QueueConfiguration queue, ExchangeConfiguration exchange, string routingKey);
 		bool IsInitialized(ExchangeConfiguration exchange);
 		bool IsInitialized(QueueConfiguration exchange);
@@ -77,7 +77,7 @@ namespace RawRabbit.Common
 			return scheduled.TaskCompletionSource.Task;
 		}
 
-		public Task BindQueueAsync(QueueConfiguration queue, ExchangeConfiguration exchange, string routingKey)
+		public Task BindQueueAsync(QueueConfiguration queue, ExchangeConfiguration exchange, string routingKey, IDictionary<string, object> arguments)
 		{
 			if (exchange.IsDefaultExchange())
 			{
@@ -106,7 +106,8 @@ namespace RawRabbit.Common
 			{
 				Queue = queue,
 				Exchange = exchange,
-				RoutingKey = routingKey
+				RoutingKey = routingKey,
+				Arguments = arguments
 			};
 			_topologyTasks.Enqueue(scheduled);
 			EnsureWorker();
@@ -153,7 +154,8 @@ namespace RawRabbit.Common
 			channel.QueueBind(
 				queue: bind.Queue.FullQueueName,
 				exchange: bind.Exchange.ExchangeName,
-				routingKey: bind.RoutingKey
+				routingKey: bind.RoutingKey,
+				arguments: bind.Arguments
 				);
 			_queueBinds.Add(bindKey);
 		}
@@ -364,6 +366,7 @@ namespace RawRabbit.Common
 			public ExchangeConfiguration Exchange { get; set; }
 			public QueueConfiguration Queue { get; set; }
 			public string RoutingKey { get; set; }
+			public IDictionary<string, object> Arguments { get; set; }
 		}
 
 		private class ScheduledUnbindQueueTask : ScheduledTopologyTask

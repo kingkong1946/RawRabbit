@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RawRabbit.Configuration.Exchange;
 using RawRabbit.Configuration.Queue;
 
@@ -7,6 +8,7 @@ namespace RawRabbit.Configuration.Subscribe
 	public interface ISubscriptionConfigurationBuilder
 	{
 		ISubscriptionConfigurationBuilder WithRoutingKey(string routingKey);
+		ISubscriptionConfigurationBuilder WithArguments(IDictionary<string, object> arguments);
 		ISubscriptionConfigurationBuilder WithPrefetchCount(ushort prefetchCount);
 		ISubscriptionConfigurationBuilder WithNoAck(bool noAck = true);
 		ISubscriptionConfigurationBuilder WithExchange(Action<IExchangeConfigurationBuilder> exchange);

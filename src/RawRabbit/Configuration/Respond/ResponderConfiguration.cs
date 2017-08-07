@@ -1,4 +1,5 @@
-﻿using RawRabbit.Configuration.Exchange;
+﻿using System.Collections.Generic;
+using RawRabbit.Configuration.Exchange;
 using RawRabbit.Configuration.Queue;
 
 namespace RawRabbit.Configuration.Respond
@@ -10,6 +11,7 @@ namespace RawRabbit.Configuration.Respond
 		public ExchangeConfiguration Exchange { get; set; }
 		public QueueConfiguration Queue { get; set; }
 		public string RoutingKey { get; set; }
+		public IDictionary<string, object> Arguments { get; set; }
 
 		public ResponderConfiguration()
 		{

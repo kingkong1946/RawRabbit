@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RawRabbit.Configuration.Exchange;
 using RawRabbit.Configuration.Queue;
 

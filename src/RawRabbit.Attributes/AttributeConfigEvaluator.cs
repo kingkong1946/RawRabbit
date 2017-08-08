@@ -109,6 +109,10 @@ namespace RawRabbit.Attributes
 					{
 						builder.WithRoutingKey(routingAttr.RoutingKey);
 					}
+					if (routingAttr.Arguments != null)
+					{
+						builder.WithArguments(routingAttr.Arguments);
+					}
 				}
 			}) + configuration;
 			var cfg = _fallback.GetConfiguration(requestType, responseType, configuration);
